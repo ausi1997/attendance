@@ -14,7 +14,7 @@ const studentSchema = new mongoose.Schema({ // defining the student data model
         unique:true,
         required:true
     },
-    password:{
+    Password:{
         type:String,
         required:true
     }

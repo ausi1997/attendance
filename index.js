@@ -8,9 +8,24 @@ const app = express();
 // connecting the database
 const db = require('./models/db');
 
+
+ // parse requests of content-type - application/json
+ app.use(express.json());
+
+ // parse requests of content-type - application/x-www-form-urlencoded
+ app.use(express.urlencoded({ extended: true }));
+ 
+
+// importing the student routes
+
+const studentRoute = require('./routes/student');
+
 app.get('/',(req,res)=>{
     res.send('Attendance Management System');
 })
+
+// student route
+app.use('/student',studentRoute);
 
 const PORT = 8005;
 // assinging the port
