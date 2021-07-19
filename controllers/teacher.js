@@ -64,3 +64,53 @@ exports.default = (req,res)=>{
         return res.json('error' +err);
     }
 }
+
+// login route for a teacher
+
+exports.signin = async(req,res)=>{
+
+            // check teacher ID exist or not
+        await  Teacher.findOne({Registration_No:req.body.Registration_No}, (errors,result)=>{
+                // check error
+                if(errors){
+                  return res.json({
+                      status:true,
+                      message:'does not exist',
+                      errors:errors
+                  });
+                }
+                 // result is empty or not
+                 if(result){
+                    // when result ha ssome doc
+                    // then match the password
+                    const match = bcrypt.compareSync(req.body.Password, result.Password);
+                    // check password is match or not
+                    if(match){
+                        // password matched
+                        let token = jwt.sign({_id:result._id}, 'verySecretValue', {expiresIn: '24h'});
+                        const {_id,Name,Subject} = result;
+                        return res.json({
+                            status:true,
+                            message:'Password matched.... login success....',
+                            result:result,
+                            token:token,  // it give the token in result
+                            user:{_id,Name,Subject}
+                        });
+                    }
+                    else{
+                        // password not matched
+                        return res.json({
+                            status:false,
+                            message:'Password do not matched....   login failed...',
+                        });
+                    }
+                }
+                else{
+                    // user doc doesnot exist
+                    return res.json({
+                        status:false,
+                        message:'user not exist....'
+                    });
+                }
+            });
+        }

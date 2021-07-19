@@ -11,6 +11,9 @@ router.all('/',teacherRoute.default);
 // register a teacher route
 router.post('/register', teacherRoute.registerTeacher);
 
+// signin a teacher 
+router.post('/signin',teacherRoute.signin);
+
 
 // exporting the router
 module.exports=router;
