@@ -20,9 +20,13 @@ const db = require('./models/db');
 
 const studentRoute = require('./routes/student');
 
-// importing the student routes
+// importing the teacher routes
 
 const teacherRoute = require('./routes/teacher');
+
+// class route
+
+const classRoute = require('./routes/class');
 
 app.get('/',(req,res)=>{
     res.send('Attendance Management System');
@@ -33,6 +37,9 @@ app.use('/student',studentRoute);
 
 // teacher route
 app.use('/teacher', teacherRoute);
+
+// class route
+app.use('/class', classRoute);
 
 
 const PORT = 8005;
