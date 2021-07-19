@@ -10,9 +10,11 @@ const classSchema = new mongoose.Schema({ // defining the  class model
         required:true,
     },
     Students:[
-        {
+       {
+
                 type:ObjectId,
                 ref:'student',
+
         }
     ],
 

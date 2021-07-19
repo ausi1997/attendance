@@ -64,3 +64,16 @@ exports.default = async(req,res)=>{
         return res.json('error' +err);
     }
 }
+
+// get student by his registration No
+
+exports.searchStudent = async(req,res)=>{
+    await Student.findOne({Registration_No:req.params.Registration_No},(error,studentdata)=>{
+        if(!error){
+            return res.json({
+                _id:studentdata._id,
+                Name:studentdata.Name
+            })
+        }
+    }).populate('student', '_id Name')
+}

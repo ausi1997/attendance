@@ -48,3 +48,23 @@ exports.createClass = (req,res)=>{
         });
     })
 }
+
+
+// adding a student to a class 
+
+exports.AddStudent = (req,res)=>{
+    const Students = [
+        {
+            _id:req.body._id
+        }
+    ]
+
+    Class.findOneAndUpdate({Standard:req.body.Standard},{
+        $push:{Students:Students}},{new:true},(error,result)=>{
+              if(!error){
+                  return res.json({
+                      result
+                  })
+              }
+        })
+}
