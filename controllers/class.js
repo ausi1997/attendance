@@ -16,25 +16,11 @@ exports.defaultroute = (req,res)=>{
 
 exports.createClass = (req,res)=>{
     const {Standard , ClassTeacher} = req.body
-   // const {Registration_No} = req.body
-
-     //   Student.findOne(Registration_No , (error,studentData)=>{
-       //     if(!error){
-         //       return res.json({
-           //         studentData
-             //   })
-          //  }
-       // })
 
     const classe = new Class({  // creating a new post
                 
         Standard,
         ClassTeacher,
-      //  Students:[
-        //    {
-          //      studentData
-     //       }
-       // ]
     });
     classe.save().then(result=>{  // saving the data in database
         res.json({
@@ -42,29 +28,32 @@ exports.createClass = (req,res)=>{
             classe:result
         });
     })
-    .catch(err=>{
-        res.json({
-            err
-        });
-    })
+}
+// function to view all class 
+exports.allClass = async(req,res)=>{
+    try{
+        await Class.find({},(error,result)=>{
+            return res.json({
+                result
+            });
+        })
+    }
+    catch(err){
+          return res.send('error' + err);
+    }
 }
 
+// view one class
 
-// adding a student to a class 
-
-exports.AddStudent = (req,res)=>{
-    const Students = [
-        {
-            _id:req.body._id
-        }
-    ]
-
-    Class.findOneAndUpdate({Standard:req.body.Standard},{
-        $push:{Students:Students}},{new:true},(error,result)=>{
-              if(!error){
-                  return res.json({
-                      result
-                  })
-              }
+exports.view =  async(req,res)=>{
+    try{
+        await Class.find({_id:req.params._id},(error,result)=>{
+            return res.json({
+                result
+            });
         })
+    }
+    catch(err){
+          return res.send('error' + err);
+    }
 }

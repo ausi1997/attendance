@@ -11,8 +11,11 @@ router.all('/',classRoute.defaultroute);
 // create a class route
 router.post('/create', classRoute.createClass);
 
-// add a student
-router.put('/addstudent' , classRoute.AddStudent);
+// view all class
+router.get('/viewAll', classRoute.allClass);
+
+// view one class
+router.get('/view/:_id',classRoute.view);
 
 
 // exporting the router

@@ -9,15 +9,6 @@ const classSchema = new mongoose.Schema({ // defining the  class model
         type:String,
         required:true,
     },
-    Students:[
-       {
-
-                type:ObjectId,
-                ref:'student',
-
-        }
-    ],
-
   //  timestamps:true
 },{
     timestamps:true
