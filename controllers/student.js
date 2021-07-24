@@ -111,7 +111,7 @@ exports.viewByClass = async(req,res)=>{
                result
            })
        }
-   })
+   }).sort("Name").select("-Password")
     }
     catch(err){
         return res.send('error' + err);
