@@ -28,6 +28,10 @@ const teacherRoute = require('./routes/teacher');
 
 const classRoute = require('./routes/class');
 
+// attendance route
+
+const attendanceRoute = require('./routes/attendance');
+
 app.get('/',(req,res)=>{
     res.send('Attendance Management System');
 })
@@ -41,6 +45,8 @@ app.use('/teacher', teacherRoute);
 // class route
 app.use('/class', classRoute);
 
+// attendance route
+app.use('/attendance', attendanceRoute);
 
 const PORT = 8005;
 // assinging the port
