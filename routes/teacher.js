@@ -14,6 +14,9 @@ router.post('/register', teacherRoute.registerTeacher);
 // signin a teacher 
 router.post('/signin',teacherRoute.signin);
 
+// add a teacher to a specific class
+router.put('/addteacher', teacherRoute.addTeacher);
+
 
 // exporting the router
 module.exports=router;

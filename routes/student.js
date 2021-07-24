@@ -11,6 +11,18 @@ router.all('/',studentRoute.default);
 // register a student route
 router.post('/register', studentRoute.registerStudent);
 
+// view all student
+
+router.get('/viewAll', studentRoute.viewAll);
+
+// view all student of a specific class 
+
+router.get('/view/:Class', studentRoute.viewByClass);
+
+// add a student in a class
+
+router.put('/addStudent', studentRoute.addStudent);
+
 // search a student 
 router.get('/search/:Registration_No',studentRoute.searchStudent);
 

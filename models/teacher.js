@@ -17,6 +17,10 @@ const teacherSchema = new mongoose.Schema({ // defining the teacher data model
     Password:{
         type:String,
         required:true
+    },
+    Class:{
+        type:ObjectId,
+        ref:'classe'
     }
   
   //  timestamps:true

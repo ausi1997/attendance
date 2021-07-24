@@ -114,3 +114,23 @@ exports.signin = async(req,res)=>{
                 }
             });
         }
+
+        // add a teacher to a specific class
+
+        exports.addTeacher = async(req,res)=>{
+            try{
+               await Teacher.findOneAndUpdate({Registration_No:req.body.Registration_No},{
+                   Class:req.body.Class
+               },(error,result)=>{
+                   if(!error){
+                       return res.json({
+                           message:'Teacher added successfully',
+                           result
+                       })
+                   }
+               }).select("-Password")
+            }
+            catch(err){
+                return res.send('error' + err);
+            }
+        }

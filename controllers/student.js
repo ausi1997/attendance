@@ -38,7 +38,6 @@ exports.default = async(req,res)=>{
                 Student.create({ 
                     // then creating the student in database
                     Name:req.body.Name,   
-                   Class:req.body.Class,
                    Registration_No:req.body.Registration_No,
                    Password:bcrypt.hashSync(req.body.Password, 8) // hashing the password
                 },(error,result)=>{
@@ -62,6 +61,60 @@ exports.default = async(req,res)=>{
     }
     catch(err){
         return res.json('error' +err);
+    }
+}
+
+// view all student
+
+exports.viewAll = async(req,res)=>{
+    try{
+          await Student.find({},(error,result)=>{
+              if(!error){
+                  return res.json({
+                      result
+                  })
+              }
+          })
+    }
+    catch(err){
+        return res.send('error' + err);
+    }
+}
+
+// add student to a class
+
+exports.addStudent = async(req,res)=>{
+    try{
+       await Student.findOneAndUpdate({Registration_No:req.body.Registration_No},{
+           Class:req.body.Class
+       },(error,result)=>{
+           if(!error){
+               return res.json({
+                   message:'Student added successfully',
+                   result
+               })
+           }
+       }).select("-Password")
+    }
+    catch(err){
+        return res.send('error' + err);
+    }
+}
+
+// view all students of a class 
+
+exports.viewByClass = async(req,res)=>{
+    try{
+   await Student.find({Class:req.params.Class},(error,result)=>{
+       if(!error){
+           return res.json({
+               result
+           })
+       }
+   })
+    }
+    catch(err){
+        return res.send('error' + err);
     }
 }
 

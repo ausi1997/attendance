@@ -6,8 +6,8 @@ const studentSchema = new mongoose.Schema({ // defining the student data model
         required:true,
     },
     Class:{
-        type:String,
-        required:true,
+        type:ObjectId,
+        ref:'classe'
     },
     Registration_No:{
         type:String,
