@@ -17,6 +17,9 @@ router.post('/signin',teacherRoute.signin);
 // add a teacher to a specific class
 router.put('/addteacher', teacherRoute.addTeacher);
 
+// view all teachers of a class
+router.get('/view/:Class',teacherRoute.viewByClass);
+
 
 // exporting the router
 module.exports=router;

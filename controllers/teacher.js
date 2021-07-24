@@ -134,3 +134,20 @@ exports.signin = async(req,res)=>{
                 return res.send('error' + err);
             }
         }
+
+        // show all teachers of a specific class 
+
+        exports.viewByClass = async(req,res)=>{
+            try{
+           await Teacher.find({Class:req.params.Class},(error,result)=>{
+               if(!error){
+                   return res.json({
+                       result
+                   })
+               }
+           }).sort("Name").select("-Password")
+            }
+            catch(err){
+                return res.send('error' + err);
+            }
+        }
