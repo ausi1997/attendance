@@ -48,34 +48,67 @@ exports.viewAttendance = async(req,res)=>{
 
 exports.markPresent = async(req,res)=>{
     try{
-        await Attendance.findByIdAndUpdate({_id:req.params._id},{
-            $push:{Present:req.body._id}
-        },{new:true},(error,result)=>{
-            if(!error){
+        await Attendance.findOne({_id:req.params._id},(error,result)=>{
+            if(result.Present.includes(req.body._id)){
                 return res.json({
-                    message:'Attendance taken successfully',
+                    message:'Already Marked',
                     result
                 })
             }
+
+            else{
+                 Attendance.findByIdAndUpdate({_id:req.params._id},{
+                    $push:{Present:req.body._id}
+                },{new:true}).exec((err,result)=>{
+                    if(err){        // executing the query
+                        return res.json(err);
+                    }
+                    else{
+                        return res.json({
+                            message:'Marked Present',
+                            result
+                        });
+                    }
+                })   
+            }
+            
         })
+       
     }
+    
     catch(err){
       console.log(err);
     }
 }
 
-exports.markPresent = async(req,res)=>{
+exports.markAbsent = async(req,res)=>{
     try{
-        await Attendance.findByIdAndUpdate({_id:req.params._id},{
-            $push:{Absent:req.body._id}
-        },{new:true},(error,result)=>{
-            if(!error){
+        await Attendance.findOne({_id:req.params._id},(error,result)=>{
+            if(result.Absent.includes(req.body._id)){
                 return res.json({
-                    message:'Attendance taken successfully',
+                    message:'Already Marked',
                     result
                 })
             }
+
+            else{
+                 Attendance.findByIdAndUpdate({_id:req.params._id},{
+                    $push:{Absent:req.body._id}
+                },{new:true}).exec((err,result)=>{
+                    if(err){        // executing the query
+                        return res.json(err);
+                    }
+                    else{
+                        return res.json({
+                            message:'Marked Absent',
+                            result
+                        });
+                    }
+                })   
+            }
+            
         })
+       
     }
     catch(err){
       console.log(err);

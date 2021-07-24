@@ -22,7 +22,7 @@ router.put('/present/:_id', attendanceRoute.markPresent);
 
 // mark absent route
 
-router.put('/absent/:_id', attendanceRoute.markPresent);
+router.put('/absent/:_id', attendanceRoute.markAbsent);
 
 
 module.exports=router;
