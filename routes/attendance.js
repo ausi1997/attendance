@@ -20,5 +20,9 @@ router.get('/viewAttendance/:Class',attendanceRoute.viewAttendance);
 
 router.put('/present/:_id', attendanceRoute.markPresent);
 
+// mark absent route
+
+router.put('/absent/:_id', attendanceRoute.markPresent);
+
 
 module.exports=router;

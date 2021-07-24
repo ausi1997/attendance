@@ -63,3 +63,21 @@ exports.markPresent = async(req,res)=>{
       console.log(err);
     }
 }
+
+exports.markPresent = async(req,res)=>{
+    try{
+        await Attendance.findByIdAndUpdate({_id:req.params._id},{
+            $push:{Absent:req.body._id}
+        },{new:true},(error,result)=>{
+            if(!error){
+                return res.json({
+                    message:'Attendance taken successfully',
+                    result
+                })
+            }
+        })
+    }
+    catch(err){
+      console.log(err);
+    }
+}
